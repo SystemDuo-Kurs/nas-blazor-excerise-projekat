@@ -1,0 +1,20 @@
+﻿@page "/"
+@inject NavigationManager NavMan
+@using Microsoft.AspNetCore.SignalR.Client
+
+
+<button @onclick="Dugme">asdasdasdasdadsasd</button>
+
+@code {
+    public HubConnection HC;
+
+    protected override async Task OnInitializedAsync()
+    {
+        HC = new HubConnectionBuilder().WithUrl(NavMan.BaseUri + "test").Build();
+        await HC.StartAsync();
+    }
+
+    private async void Dugme() => await HC.SendAsync("Food");
+    
+
+}
